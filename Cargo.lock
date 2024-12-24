@@ -362,7 +362,7 @@ checksum = "8c3c1a368f70d6cf7302d78f8f7093da241fb8e8807c05cc9e51a125895a6d5b"
 [[package]]
 name = "bdk"
 version = "0.28.2+fix.1"
-source = "git+https://github.com/velykodnyi/bdk?tag=0.28.2+fix.2#94823d28262e04987ebc6f8aa16d1699aff39229"
+source = "git+https://github.com/velykodnyi/bdk?tag=0.28.2+fix.2#888ba3930bf0a491336d0b86fc4b331b87c5114c"
 dependencies = [
  "async-trait",
  "bdk-macros",
@@ -434,8 +434,9 @@ dependencies = [
 
 [[package]]
 name = "bitcoincore-rpc"
-version = "0.16.0+fix.1"
-source = "git+https://github.com/velykodnyi/rust-bitcoincore-rpc?tag=0.16.0+fix.1#c80a835ce9f3d9d529065987d5f74a8313e76977"
+version = "0.16.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "0261b2bb7617e0c91b452a837bbd1291fd34ad6990cb8e3ffc28239cc045b5ca"
 dependencies = [
  "bitcoincore-rpc-json",
  "jsonrpc",
@@ -447,7 +448,8 @@ dependencies = [
 [[package]]
 name = "bitcoincore-rpc-json"
 version = "0.16.0"
-source = "git+https://github.com/velykodnyi/rust-bitcoincore-rpc?tag=0.16.0+fix.1#c80a835ce9f3d9d529065987d5f74a8313e76977"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "c231bea28e314879c5aef240f6052e8a72a369e3c9f9b20d9bfbb33ad18029b2"
 dependencies = [
  "bitcoin",
  "serde",
@@ -2127,8 +2129,9 @@ dependencies = [
 
 [[package]]
 name = "jsonrpc"
-version = "0.12.0+fix.1"
-source = "git+https://github.com/velykodnyi/rust-jsonrpc?tag=0.12.0+fix.1#94f30f8fa5d8f9e315a7fce6d7e4d2f25ddd3359"
+version = "0.12.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "7f8423b78fc94d12ef1a4a9d13c348c9a78766dda0cc18817adf0faf77e670c8"
 dependencies = [
  "base64-compat",
  "serde",
