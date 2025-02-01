@@ -1,5 +1,5 @@
 [package]
-name    = "taprootized-atomic-swaps"
+name = "taprootized-atomic-swaps"
 version = "0.1.0"
 edition = "2021"
 license = "GPL-3.0"
@@ -8,29 +8,37 @@ license = "GPL-3.0"
 members = [
     "crates/rapidsnark",
     "crates/rapidsnark-sys",
-    "crates/witness_calculator"
+    "crates/witness_calculator",
+    "crates/wallet_helpers",
 ]
 
 [dependencies]
-tokio              = { version = "1.35.1", default-features = false, features = ["rt-multi-thread"] }
-hex                = { version = "0.4.3",   default-features = false }
-rand               = { version = "0.8.4",   default-features = false }
-eyre               = { version = "0.6.11",  default-features = false }
-clap               = { version = "4.4.18",  default-features = false, features = ["std"] }
-ethers             = { version = "=2.0.7",  default-features = false, features = ["abigen", "rustls", "ws"] }
-config             = { version = "0.13.4",  default-features = false, features = ["toml"] }
-serde              = { version = "1.0.130", default-features = false }
-num                = { version = "0.4.0" }
-serde_json         = { version = "1.0.111" }
-rapidsnark         = { path    = "crates/rapidsnark" }
-witness-calculator = { path    = "crates/witness_calculator" }
-
-[dependencies.bdk]
-git              = "https://github.com/velykodnyi/bdk"
-tag              = "0.28.2+fix.2"
-features         = ["rpc", "std", "compiler"]
-default-features = false
+tokio = { version = "1.35.1", default-features = false, features = [
+    "full",
+] }
+hex = { version = "0.4.3", default-features = false }
+rand = { version = "0.8.4", default-features = false }
+eyre = { version = "0.6.11", default-features = false }
+clap = { version = "4.4.18", default-features = false, features = ["std"] }
+ethers = { version = "=2.0.7", default-features = false, features = [
+    "abigen",
+    "rustls",
+    "ws",
+] }
+config = { version = "0.13.4", default-features = false, features = ["toml"] }
+serde = { version = "1.0.130", default-features = false }
+num = { version = "0.4.0" }
+serde_json = { version = "1.0.111" }
+rapidsnark = { path = "crates/rapidsnark" }
+witness-calculator = { path = "crates/witness_calculator" }
+miniscript = "12.3.0"
+anyhow = "1.0.95"
+bdk_wallet = { version = "1.0.0", features = ["std", "compiler", "rusqlite"] }
+log = "0.4.22"
+wallet_helpers = { path = "crates/wallet_helpers" }
+env_logger = "0.11.6"
+bdk_bitcoind_rpc = "0.17.1"
 
 [build-dependencies]
 # To build rust bindings for contracts
-ethers = { version = "=2.0.7",  default-features = false, features = ["abigen"] }
+ethers = { version = "=2.0.7", default-features = false, features = ["abigen"] }

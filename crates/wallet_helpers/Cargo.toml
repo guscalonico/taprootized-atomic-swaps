@@ -1,0 +1,12 @@
+[package]
+name = "wallet_helpers"
+version = "0.1.0"
+
+[dependencies]
+anyhow = "1.0.95"
+bdk_bitcoind_rpc = "0.17.1"
+bdk_wallet = { version = "1.0.0", features = ["rusqlite"] }
+env_logger = "0.11.6"
+log = "0.4.22"
+miniscript = "12.3.0"
+rand = "0.8.5"

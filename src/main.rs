@@ -1,7 +1,8 @@
 extern crate config as exconfig;
 
-use bdk::bitcoin::secp256k1::Secp256k1;
-use eyre::{Context, Result};
+use anyhow::{Result, Context};
+use log::LevelFilter;
+use miniscript::bitcoin::key::Secp256k1;
 use std::env;
 use std::path::PathBuf;
 use swap_participant::SwapParticipant;
@@ -11,10 +12,13 @@ mod swap_participant;
 
 #[tokio::main]
 async fn main() -> Result<()> {
+    env_logger::init();
+    log::set_max_level(LevelFilter::Debug);
+    
     if env::args().len() != 2 {
         eprintln!(
             "Usage: {} <path-to-config-file>",
-            env::args().next().unwrap()
+            env::args().next().unwrap() 
         );
         std::process::exit(1);
     }
@@ -23,7 +27,7 @@ async fn main() -> Result<()> {
         .add_source(exconfig::File::from(path_to_config))
         .build()?
         .try_deserialize()
-        .wrap_err("failed to parse config")?;
+        .context("failed to parse config")?;
 
     let secp_ctx = Secp256k1::new();
     let rng = &mut rand::thread_rng();
@@ -31,13 +35,13 @@ async fn main() -> Result<()> {
     let mut alice =
         SwapParticipant::from_config("Alice".to_string(), &cfg, &cfg.alice_config, &secp_ctx)
             .await
-            .wrap_err("failed to initialize Alice")?;
+            .context("failed to initialize Alice")?;
     let alice_bitcoin_public_key = alice.bitcoin_public_key();
     let alice_ethereum_address = alice.ethereum_address();
 
     let mut bob = SwapParticipant::from_config("Bob".to_string(), &cfg, &cfg.bob_config, &secp_ctx)
         .await
-        .wrap_err("failed to initialize Bob")?;
+        .context("failed to initialize Bob")?;
 
     //Getting escrow pubkey for hashing and integration purposes
     let (proof, pubsignals, _escrow_pubkey) = alice.new_atomic_swap(
